@@ -1,0 +1,37 @@
+{
+    "department":[
+        {
+            "departmentName":"Marketing",
+            "employee":[
+                {
+                    "employeeName": "Nguyen Tuan Trung"
+                },
+                {
+                    "employeeName": "Dau Xuan Duy"
+                }
+            ]
+        },
+        {
+            "departmentName":"IT",
+            "employee":[
+                {
+                    "employeeName": "Hoang Dai Phong"
+                },
+                {
+                    "employeeName": "Huynh Tuan Kiet"
+                }
+            ]
+        },
+        {
+            "departmentName":"Sale",
+            "employee":[
+                {
+                    "employeeName": "Le Cong Duong"
+                },
+                {
+                    "employeeName": "Nguyen Anh Sang"
+                }
+            ]
+        }
+    ]
+}
