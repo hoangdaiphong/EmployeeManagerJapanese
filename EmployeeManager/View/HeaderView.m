@@ -10,14 +10,14 @@
 
 @implementation HeaderView
 
-// Các biến tương ứng với các UI
+// UIに対応する変数
 @synthesize lblTitle;
 @synthesize btnAdd;
 @synthesize btnBack;
 @synthesize delegate;
 @synthesize currentController;
 
-//11. Hàm tạo HeaderView
+//11 HeaderView コンストラクタ
 - (instancetype)init {
     
     self = [[[NSBundle mainBundle] loadNibNamed:@"HeaderView" owner:self options:nil] objectAtIndex:0];
@@ -25,28 +25,28 @@
     return self;
 }
 
-// 13. Tải từ kho lưu trữ trình tạo giao diện 
+//13 インターフェイス ストレージからダウンロード
 - (void)awakeFromNib {
 
     [super awakeFromNib];
     [self setBackgroundColor:[UIColor whiteColor]];
 }
 
-//12. Cấu hình HeaderView
+//12 HeaderView インターフェイスの設定
 - (void)setHeaderWithTitle:(NSString *)title hideBack:(BOOL)hideBack hideAdd:(BOOL)hideAdd inController:(UIViewController *)controller {
     
-    [lblTitle setText:title];   //Title
+    [lblTitle setText:title];   //タイトル
     
-    [self setFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.bounds.size.height)];    //Layout
+    [self setFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.bounds.size.height)];    //レイアウト
     
-    // Cấu hình ẩn hiện button
+    // ボタンの表示と非表示を設定する
     [btnAdd setHidden:hideAdd];
     [btnBack setHidden:hideBack];
     
     currentController = controller;
 }
 
-//16 Ánh xạ vào button add -> ấn vào button thoả mãn điều kiện sẽ thực hiện hàm headerViewPushRightAction
+//16 追加ボタンをへマッピング -> 条件が合わせる場合にボタンをタッチするとheaderViewPushRightAction関数を実行される
 - (IBAction)addAction:(id)sender {
     
     if (delegate != nil && [delegate respondsToSelector:@selector(headerViewPushRightAction)]) {
@@ -56,7 +56,7 @@
     
 }
 
-//20 Ánh xạ vào button back -> ấn vào button thoả mãn điều kiện sẽ thực hiện currentController -> Chuyển màn hình
+//20 バックボタンをへマッピング -> 条件が合わせる場合にボタンをタッチすると現在のテーブルビューを実行される -> 画面を遷移
 - (IBAction)backAction:(id)sender {
     
     [currentController.navigationController popViewControllerAnimated:YES];

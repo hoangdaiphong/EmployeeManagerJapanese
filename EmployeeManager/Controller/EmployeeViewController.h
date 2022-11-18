@@ -15,15 +15,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface EmployeeViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate> {
-    // Tao list Employee
+    // 社員リストを作成
     NSMutableArray *employeeList;
 }
 
-// Quản lý UI bên file xib
+// xib ファイルのUIを管理
 @property (nonatomic, weak) IBOutlet UIView *containView;
 @property (nonatomic, weak) IBOutlet UITableView *tblEmployee;
 
-// Bên DepartmentView nhấn vào một Bộ phận thì truyền nó vào inputDepartment, đọc Employee ở Department được chọn để hiển thị lên TableView
+// DepartmentViewで部署をタッチするとその部署にinputDepartmentを貼り付ける、その部署で社員を全部読んで　→ TableViewで表示させる
 @property (nonatomic, weak) Department *inputDepartment;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-// Thêm file .h
+// file .hを追加
 #import "HeaderView.h"
 #import "Department+CoreDataClass.h"
 
@@ -16,20 +16,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol AddViewControllerDelegate <NSObject>
 
-// Thực hiện sau khi add Object thành công
+// オブジェクトの追加に成功した後に実行
 @optional
 - (void)addViewControllerFinishWithSuccess:(BOOL)success;
 
 @end
 
-@interface AddViewController : UIViewController <HeaderViewDelegate>    // Thêm HeaderViewDelegate quản lý chuyển màn hình
+@interface AddViewController : UIViewController <HeaderViewDelegate>    // 画面遷移を管理するためHeaderViewDelegateを追加
 
-// Quản lý các UI bên file xib
+// xib ファイルのUIを管理する
 @property (nonatomic, weak) IBOutlet UIView *containView;
 @property (nonatomic, weak) IBOutlet UITextField *txtName;
 @property (nonatomic, weak) IBOutlet UIButton *btnSave;
 
-// Biến check có phải là Edit hoặc Employee hay không
+// チェック変数は Edit または Employee ですか?
 @property (nonatomic, assign) BOOL editFlag;
 @property (nonatomic, assign) BOOL isEmployee;
 

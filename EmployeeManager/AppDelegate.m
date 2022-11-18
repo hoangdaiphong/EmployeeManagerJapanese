@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-// Thêm file quản trị màn hình đầu
+// 最初の画面の管理ファイルを追加
 #import "DepartmentViewController.h"
 
 @interface AppDelegate ()
@@ -20,17 +20,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //1. Thiết lập lúc khởi động app sẽ vào màn hình department --------------------------
+    //1 アプリ起動時の設定で部署画面に入ります
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
     
-    // Tạo object departmentView với kiểu DepartmentViewController
+    // DepartmentViewController タイプでdepartmentView オブジェクトを作成する
     DepartmentViewController *departmentView = [[DepartmentViewController alloc] init];
     
-    // Tạo biến chuyển qua màn hình department
+    // 部署画面で遷移を作成する
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:departmentView];
     
-    // Chuyển qua màn hình department
+    // 部署画面をに遷移
     [self.window setRootViewController:navi];
     
     [self.window makeKeyAndVisible];

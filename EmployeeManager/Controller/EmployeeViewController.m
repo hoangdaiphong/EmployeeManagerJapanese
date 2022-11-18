@@ -14,7 +14,7 @@
 
 @implementation EmployeeViewController
 
-// Khai báo biến giống với file .h
+// ヘッダファイル内の対応する変数
 @synthesize containView;
 @synthesize tblEmployee;
 @synthesize inputDepartment;
@@ -23,54 +23,59 @@
     [super viewDidLoad];
     
     [self setupView];
+    
 }
 
-//37 Thiết lập màn hình hiển thị Employee
+//37 社員画面の表示を設定
 - (void)setupView {
     
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
-    // Thanh Navigation
+    // ナビゲーションバー
     HeaderView *header = [[HeaderView alloc] init];
     [header setHeaderWithTitle:@"社員名" hideBack:NO hideAdd:NO inController:self];
     header.delegate = self;
     [self.view addSubview:header];
     
-    // TableView Employee
+    // テーブルビューの社員
     [tblEmployee setFrame:CGRectMake(0, header.bounds.size.height, SCREEN_WIDTH, SCREEN_HEIGHT - header.bounds.size.height)];
     [tblEmployee registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     
-    // Khai báo dataSource và delegate như ở file .
+    // dataSource と delegateを宣言する
     tblEmployee.dataSource = self;
     tblEmployee.delegate = self;
     
-    // Lấy dữ liệu mảng
+    // 配列データを取得する
     [self getData];
 }
 
-//36 Lấy dữ liệu Employee vào một Array
+//36 社員データを配列に取得する
 - (void)getData {
     
     employeeList = [[NSMutableArray alloc] init];
     
     [employeeList addObjectsFromArray:[[inputDepartment hasMany]allObjects]];
     
+//    [employeeList addObjectsFromArray:[[ContentManager shareManager] getAllEmployee]];
+    
+    
     [tblEmployee reloadData];
+    
 }
 
 #pragma mark - HeaderView's Delegate
 
-//38 Nhấn dấu cộng trên thanh header -> Chuyển qua màn hình 
+//38 ヘッダーバーのプラスボタンをタッチすると -> 画面遷移
 - (void)headerViewPushRightAction {
     
     AddViewController *addView = [[AddViewController alloc] init];
     
-    // Khi YES bên view add sẽ thực hiện thêm Employee, nếu không set mặc định là NO thì màn hình view add thực hiện thêm Department
+    // YESとしたらう追加画面で社員を挿入する、じゃなかったらNOをそのまますると追加画面で部署を挿入する
     addView.isEmployee = YES;
     
     addView.delegate = self;
     
-    //43 Gán Department bên AddView trùng với Employee
+    //43 社員画面の部署と追加画面の部署が同じするため
     addView.inputDepartment = inputDepartment;
     
     [self.navigationController pushViewController:addView animated:YES];
@@ -78,7 +83,7 @@
 
 #pragma mark - AddViewController's Delegate
 
-// Nếu add employee thành công thì sẽ get danh sách Employee
+// 社員の追加が成功すると、社員リストが取得される
 - (void)addViewControllerFinishWithSuccess:(BOOL)success {
     
     if (success) {
@@ -89,14 +94,14 @@
 
 #pragma mark - TableView's Delegate
 
-//39 Cấu hình hiển thị data trên tableView
+//39 テーブル ビューでデータ表示の構成
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [employeeList count];    // Số section
+    return [employeeList count];    // いくつセクション
 }
 
-//41 Truyền empoyeeName vào từng cell
+//41 各セルにempoyeeNameを渡す
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TableViewCell *cell = [self.tblEmployee dequeueReusableCellWithIdentifier:@"Cell"];
@@ -110,13 +115,13 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Xoá màu nền sau khi nhấn vào
+    // タップ後に背景色を削除
     [self.tblEmployee deselectRowAtIndexPath:indexPath animated:YES];    
 }
 
 #pragma mark - TableViewCell's Delegate
 
-//46 Hàm edit Employee khi ấn vào cell
+//46 セルにタッチすすと社員が編集される関数を読む
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
     
     if ([[ContentManager shareManager] editEmployee:[employeeList objectAtIndex:index.row]]) {
@@ -132,7 +137,7 @@
     }
 }
 
-//47 Hàm delete Employee khi ấn vào cell
+//47 セルにタッチすすと社員が削除される関数を読む
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
     
     if ([[ContentManager shareManager] deleteEmployee:[employeeList objectAtIndex:index.row]]) {

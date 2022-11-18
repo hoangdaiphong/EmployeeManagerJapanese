@@ -10,10 +10,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Trường hợp class này muốn thực thi một method của class khác  -> sử dụng protocol
+// このクラスが別のクラスのメソッドを実装したい場合 -> プロトコルを使用
 @protocol HeaderViewDelegate <NSObject>
 
-// @optional là kiểu không bắt buộc, hàm chuyển màn hình nhập Department
+// @optional：強制がない　ー　別画面を遷移機能
 @optional
 - (void)headerViewPushRightAction;
 
@@ -21,18 +21,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HeaderView : UIView
 
-// Quản lý các UI bên file xib
+// xib ファイル内で UI を管理する
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UIButton *btnBack;
 @property (nonatomic, weak) IBOutlet UIButton *btnAdd;
 
-// Quản lý chuyển màn hình khi ấn back
+// 現在の画面を管理変数
 @property (nonatomic, weak) UIViewController *currentController;
 
-// Biến để thực hiện việc chuyển màn hình
+// 画面遷移の変数
 @property (nonatomic, weak) id<HeaderViewDelegate> delegate;
 
-// Thiết lập cấu hình trên thanh Navigation bar
+// ナビゲーション バーの表示を設定する
 - (void)setHeaderWithTitle:(NSString *)title hideBack:(BOOL)hideBack hideAdd:(BOOL)hideAdd inController:(UIViewController *)controller;
 
 @end

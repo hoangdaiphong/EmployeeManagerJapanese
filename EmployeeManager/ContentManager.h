@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-// 二つ.h ファイルを追加
+// 二つヘッダファイルを追加
 #import "Department+CoreDataClass.h"
 #import "Employee+CoreDataClass.h"
 

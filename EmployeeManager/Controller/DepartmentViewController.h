@@ -8,25 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-// Import 2 file bên View và AddViewController
+// 二つヘッダファイル(ナビゲーション バーと追加画面)を追加する
 #import "TableViewCell.h"
 #import "HeaderView.h"
 #import "AddViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Thêm thư viện UITableViewDataSource và UITableViewDelegate để tạo Table View
+// テーブル ビュー作成するため ITableViewDataSource と UITableViewDelegate ライブラリーを追加する
 @interface DepartmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate>
 
-// Tạo dataList để chứa các Object Department
+// オブジェクト部署を含む dataList を作成する
 {
     NSMutableArray *dataList;
 }
 
-// UITableView để quản lý cho talbeView Department -> Ánh xạ vào Table View ở file xib
+// talbeView部署を管理するUITableView -> ファイル xib のテーブル ビューへのマッピング
 @property (nonatomic, weak) IBOutlet UITableView *tblDepartment;
 
-// UIView để chứa toàn bộ UI của màn hình
+// 画面の UI 全部を含む UIView
 @property (nonatomic, weak) IBOutlet UIView *containView;
 
 @end

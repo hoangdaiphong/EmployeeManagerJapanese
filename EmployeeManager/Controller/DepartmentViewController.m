@@ -15,100 +15,100 @@
 
 @implementation DepartmentViewController
 
-// @synthesize sẽ tạo các phương thức getter và setter cho thuộc tính
+// @synthesize: プロパティの getter メソッドと setter メソッドを作成する
 @synthesize tblDepartment;
 @synthesize containView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // URL Database:
+    // URL Database file:
 //    NSString *document = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
 //    NSString *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-
+//    NSLog(@"%@", dirPaths);
     [self setupView];
     
     [self parseJSON];
 }
-// JSON
+
+// JSON ------------------------------------------------------------------------------
 
 - (void)parseJSON {
     
-    // Tìm file json
+    // jsonファイルを見つける
     NSString* path  = [[NSBundle mainBundle] pathForResource:@"data" ofType:@"json"];
     
-    // Lấy dữ liệu JSON(String)
+    // データを取る: JSON(String)
     NSString* jsonString = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     
     NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
     
-    // Kiểm tra lỗi
+    // エラーチェック変数
     NSError *jsonError;
     
-    // Lấy dữ liệu ---- NSLog(@"%@", allKeys);
+    // データを取る ---- NSLog(@"%@", allKeys);
     id allKeys = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&jsonError];
     
-    // Tạo NSArray lấy mảng department ---- NSLog(@"%@", arrDepartmentJSON);
+    // NSArray を作成して部署配列を取得 ---- NSLog(@"%@", arrDepartmentJSON);
     NSArray *arrDepartmentJSON = [allKeys objectForKey:@"department"];
     
-    // Duyệt mảng thêm department từ JSON vào Database
+    // 配列を参照して、JSON からデータベースに部署を追加
     for (int i = 0; i < arrDepartmentJSON.count; i++) {
         
-        // Tạo NSDictionary để lấy từng Object trong mảng department ------ NSLog(@"%@", departmentJSON);
+        // 部署配列の中にオブジェクトを取得するために NSDictionary を作成します ------ NSLog(@"%@", departmentJSON);
         NSDictionary *departmentJSON = arrDepartmentJSON[i];
         
-        // Tạo NSArray lấy mảng employee ------ NSLog(@"%@", arrEmployeeJSON);
+        // NSArray を作成して、社員の配列を取得 ------ NSLog(@"%@", arrEmployeeJSON);
         NSArray *arrEmployeeJSON = [departmentJSON objectForKey:@"employee"];
         
-        // Lấy data trong Object theo key ------ NSLog(@"%@", departmentNameJSON);
+        // オブジェクトのデータをキーで取得 ------ NSLog(@"%@", departmentNameJSON);
         NSString *departmentNameJSON = [departmentJSON objectForKey:@"departmentName"];
         
-        // Nếu không tồn tại trong Database thì sẽ thêm vào
+        // データベースに存在しない場合は、データベースに追加される
         if(![self checkDepartment:departmentNameJSON]) {
             
-            // Insert vào database
+            // データベースに挿入
             [[ContentManager shareManager] insertDepartmentWithName:departmentNameJSON];
         }
         
-        // Duyệt mảng thêm employee từ JSON vào Database
+        // 配列を参照して社員を JSON からデータベースに追加
         for (int j = 0; j < arrEmployeeJSON.count; j++) {
             
-            // Tạo NSDictinary để lấy từng Object trong mảng employee ----- NSLog(@"%@", employeeJSON);
+            // NSDictinary を作成して、配列 employeeの中にオブジェクトを取得します ----- NSLog(@"%@", employeeJSON);
             NSDictionary *employeeJSON = arrEmployeeJSON[j];
            
-            // Lấy data trong Object theo key ------ NSLog(@"%@", employeeNameJSON);
+            // オブジェクトのデータをキーで取得 ------ NSLog(@"%@", employeeNameJSON);
             NSString *employeeNameJSON = [employeeJSON objectForKey:@"employeeName"];
             
-            // Nếu không tồn tại trong Database thì sẽ thêm vào
+            // データベースに存在しない場合は追加されます
             if(![self checkEmployee:employeeNameJSON]) {
                 
-//                Department *department = [[Department alloc] init];
-//                department.departmentName = departmentNameJSON;
                 NSMutableArray *listDepartment = [[NSMutableArray alloc] init];
-                
+
                 [listDepartment addObjectsFromArray:[[ContentManager shareManager] getAllDepartment]];
-                
+
                 for (int m = 0; m < listDepartment.count; m++) {
+                
+                    Department *department = listDepartment[m];
                     
-                    //Department *department = listDepartment[m];
-                    Employee *employee = [[Employee alloc] init];
-                    employee.employeeName = employeeNameJSON;
-                    employee.inDepartment = listDepartment[m];
-                    // Insert vào database
-                    [[ContentManager shareManager] insertEmployeeWithName:employee.employeeName inDepartment:listDepartment[m]];
+                    if(department.departmentName == departmentNameJSON) {
+                       
+                        // データベースに挿入
+                        [[ContentManager shareManager] insertEmployeeWithName:employeeNameJSON inDepartment:department];
+                    }
+                    
                 }
                 
             }
         }
-        
-
     }
+    
     [self getData];
 
     
 }
 
-// Kiểm tra xem trong database đã có Department Name chưa
+// データベースの中で部署名があるかどうかを確認
 - (BOOL)checkDepartment:(NSString *)departmentName {
 
     NSMutableArray *listDepartment = [[NSMutableArray alloc] init];
@@ -126,7 +126,7 @@
     return NO;
 }
 
-// Kiểm tra xem trong database đã có Employee Name chưa
+// データベースの中で社員名があるかどうかを確認
 - (BOOL)checkEmployee:(NSString *)employeeName {
 
    NSMutableArray *listEmployee = [[NSMutableArray alloc] init];
@@ -146,87 +146,88 @@
 
 // ----------------------------------------------------------------------------
 
-//15 Màn hình chuẩn bị xuất
+//15 画面が表示されようとしている
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    // Ẩn thanh Navigation gốc
+    
+    // 元のナビゲーション バーを非表示にする
     [self.navigationController setNavigationBarHidden:YES];
 }
 
-//7 Thiết lập cấu hình cho màn hình
+//7 画面の構成
 - (void)setupView {
     
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];   // layout containView
 
-    //14 Cấu hình thanh header
+    //14 ヘッダー バーを構成する
     HeaderView *header = [[HeaderView alloc] init];
     [header setHeaderWithTitle:@"部署名" hideBack:YES hideAdd:NO inController:self];
-    //17 Gán delegate chuyển màn hình Department
+    //17 部署画面を遷移するためdelegateに設定する
     header.delegate = self;
-    [containView addSubview:header];    // Thêm header vào containView
+    [containView addSubview:header];    // ヘッダーをcontainViewに追加
     
     [tblDepartment setFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];     // layout tableView
     
-    // Sau khi Set cell xong gán vào tableView
+    // セルの設定が完了したら、tableViewセルに貼り付ける
     [tblDepartment registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     
-    //25 Khai báo dataSource và delegate
+    //25 dataSource と delegateを宣言する
     tblDepartment.dataSource = self;
     tblDepartment.delegate = self;
     
     [self getData];
 }
 
-//6 Hàm lấy danh sách Department từ Database
+//6 データベースから部署リストを取得する機能
 - (void)getData {
     
     dataList = [[NSMutableArray alloc] init];
     
-    // Gọi hàm lấy danh sách từ Database (thông qua PrefixHeader.pch)
+    // データベースからリストを取得 (PrefixHeader.pchで)
     [dataList addObjectsFromArray:[[ContentManager shareManager] getAllDepartment]];
     
     [tblDepartment reloadData];
 }
 
 #pragma mark - TableView's delegate
-//9. Có bao nhiêu section trong Table
+//9 テーブルにはいくつのセクションがある
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     return [dataList count];
 }
 
-//10 Tạo cell và thêm từng data vào từng cell
+//10 セルを作成し、各データを各セルに追加
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TableViewCell *cell = [self.tblDepartment dequeueReusableCellWithIdentifier:@"Cell"];
     
     [cell setCellWithDepartment:[dataList objectAtIndex:indexPath.row] atIndex:indexPath];
     
-    //28 Gán delegate của tableViewCell -> quản lý sửa và xoá
+    //28 tableViewCellのdelegateに貼り付ける -> 編集と削除の管理
     cell.delegate = self;
     
     return cell;
 }
 
-//35 Khi nhấn vào chuyển đến TableView Employee
+//35 オンタッチでTableView社員画面に移動
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    // Xoá màu nền sau khi nhấn vào
+    // タップ後に背景色を削除
     [self.tblDepartment deselectRowAtIndexPath:indexPath animated:YES];
     
-    // Khi bấm vào 1 bộ phận thì chuyển qua danh sách Nhân viên trong Bộ phận đó
+    // 部署をタッチすると、その部署の社員の一覧画面に遷移
     EmployeeViewController *employeeView = [[EmployeeViewController alloc] init];
     
     employeeView.inputDepartment = [dataList objectAtIndex:indexPath.row];
     
-    // Chuyển đến màn hình Employee
+    // 社員の一覧画面に遷移
     [self.navigationController pushViewController:employeeView animated:YES];
     
 }
 
 #pragma mark HeaderView's delegate
-//18 Hàm thực hiện chuyển đến màn hình Add 
+//18 追加画面に遷移
 - (void)headerViewPushRightAction {
     
     AddViewController *addView = [[AddViewController alloc] init];
@@ -239,7 +240,7 @@
 
 #pragma mark - Add View Delegate
 
-// 23 Nếu thêm dữ liệu thành công thì lấy lại danh sách Department
+// 23 データの追加が成功したら、部署リストを取得
 - (void)addViewControllerFinishWithSuccess:(BOOL)success {
     
     if(success) {
@@ -250,7 +251,7 @@
 
 #pragma mark - TableViewCell's Delegate
 
-//30 Xoá Department trong database khi ấn vào cell chứa department đó
+//30 削除ボタン：部署を含むセルをタッチすると、データベースの中でその部署を削除
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
     
     if ([[ContentManager shareManager] deleteDepartment:[dataList objectAtIndex:index.row]]) {
@@ -267,7 +268,7 @@
     }
 }
 
-//33 Sửa Department trong database khi ấn vào cell chứa department đó
+//33 編集ボタン：部署を含むセルをタッチすると、編集画面を遷移
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index {
     
     AddViewController *addView = [[AddViewController alloc] init];

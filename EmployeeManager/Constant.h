@@ -16,6 +16,6 @@
 //
 //NS_ASSUME_NONNULL_END
 
-// Kiểu NSObject -> Layout cho màn hình tableView
+// NSObject フィル -> tableView 画面のレイアウト
 #define SCREEN_WIDTH     [[UIScreen mainScreen]bounds].size.width
 #define SCREEN_HEIGHT    [[UIScreen mainScreen]bounds].size.height

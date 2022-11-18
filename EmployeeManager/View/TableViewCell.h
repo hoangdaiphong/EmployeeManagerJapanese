@@ -12,28 +12,28 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Protocol để gọi hàm sửa xoá
+// 編集か削除関数を呼び出すプロトコル
 @protocol TableViewCellDelegate <NSObject>
 
-// hàm quản lý sự kiện khi Delete và Edit từng Cell
+// セルの削除・編集時のイベント管理機能
 @optional
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index;
 - (void)tableViewCellEditAtIndex:(NSIndexPath *)index;
 @end
 
-// Quản lý Cell hiện tại
+// 現在のセル管理
 @interface TableViewCell : UITableViewCell {
     
     NSIndexPath *currentCell;
 }
 
-// UILabel quản lý Label bên file xib (tên của Department và Emplooyee)
+// UILabel: xib ファイルのラベルを管理 (社員名と部署名)
 @property (nonatomic, weak) IBOutlet UILabel *lblName;
 
-// tạo biến delegate để gọi hàm sửa xoá
+// デリゲート変数を作成して削除か編集関数を呼び出す
 @property (nonatomic, weak) id<TableViewCellDelegate>delegate;
 
-// Hàm set Cell truyền dữ liệu Department và Employee
+// 部門と社員のデータをセルに送信する関数
 - (void)setCellWithDepartment:(Department *)department atIndex:(NSIndexPath *)index;
 - (void)setCellWithEmployee:(Employee *)employee atIndex:(NSIndexPath *)index;
 

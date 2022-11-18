@@ -92,7 +92,7 @@
     
     NSManagedObjectContext *context = [self getCurrentContext];
     
-    // 部門を取得するためのリクエストをコンストラクタ
+    // 部署を取得するためのリクエストをコンストラクタ
     NSFetchRequest *request = [Department fetchRequest];
     
     // departmentName をアルファベット順に並べ替える
@@ -102,7 +102,7 @@
     
     NSError *error = nil;
     
-    // 配列(Array)で部門を取得する
+    // 配列(Array)で部署を取得する
     NSArray *list = [context executeFetchRequest:request error:&error];
     
     return list;

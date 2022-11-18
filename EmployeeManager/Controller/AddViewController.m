@@ -14,7 +14,7 @@
 
 @implementation AddViewController
 
-// Các biến tương ứng bên file .h
+// ヘッダファイル内の対応する変数
 @synthesize containView;
 @synthesize delegate;
 @synthesize txtName;
@@ -30,14 +30,14 @@
     [self setupView];
 }
 
-//19 Cấu hình màn hình hiển thị
+//19 表示画面の設定
 - (void)setupView {
     
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     
     HeaderView *header = [[HeaderView alloc] init];
     
-    // Cấu hình màn hình thêm hoặc sửa Department, Employee dựa vào biến boolean editFlag và biến isEmployee
+    // boolean 変数 editFlag と変数 isEmployee に基づいて、Department、Employee を追加または編集する画面を構成
     if (editFlag) {
         
         if (isEmployee) {
@@ -74,7 +74,7 @@
     
 }
 
-// Sửa hoặc thêm vào database Department hoặc Employee dựa theo editFlag và isEmployee
+// boolean 変数 editFlag と変数 isEmployee に基づいて,データベースに部署か社員を編集、または挿入
 - (IBAction)addAction:(id)sender {
     
     if ([[txtName text] length] > 0) {
@@ -85,7 +85,7 @@
             
             if (isEmployee) {
                 
-                //34 Cập nhật tên Employee mới sửa
+                //34 変更した社員名をアップデート
                 inputEmployee.employeeName = [txtName text];
                 
                 success = [[ContentManager shareManager] editEmployee:inputEmployee];
@@ -102,17 +102,17 @@
                 success = [[ContentManager shareManager] insertEmployeeWithName:txtName.text inDepartment:inputDepartment];
                 
             } else {
-                //21 Thực hiện việc add Department
+                //21 新しい部署を追加→アップデート
                 success = [[ContentManager shareManager] insertDepartmentWithName:txtName.text];
             }
         }
         
         if (delegate != nil && [delegate respondsToSelector:@selector(addViewControllerFinishWithSuccess:)]) {
-            //22 Chuyển qua màn hình Department
+            //22 部署画面を遷移
             [delegate addViewControllerFinishWithSuccess:success];
         }
     }
-    //24 Khi ấn nút thì chuyển sang màn hình Department
+    //24 ボタンをタッチすると部署画面を遷移
     [self.navigationController popViewControllerAnimated:YES];
 }
 
