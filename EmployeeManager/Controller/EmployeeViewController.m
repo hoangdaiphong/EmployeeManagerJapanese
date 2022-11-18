@@ -1,6 +1,6 @@
 //
 //  EmployeeViewController.m
-//  QuanLyNhanVien
+//  EmployeeManager
 //
 //  Created by Hoang  Dai Phong on 2022/11/07.
 //  Copyright © 2022 HoangDaiPhong. All rights reserved.
@@ -101,7 +101,7 @@
     return [employeeList count];    // いくつセクション
 }
 
-//41 各セルにempoyeeNameを渡す
+//41 各セルに社員名を渡す
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     TableViewCell *cell = [self.tblEmployee dequeueReusableCellWithIdentifier:@"Cell"];
