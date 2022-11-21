@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 // デリゲート変数を作成して削除か編集関数を呼び出す
 @property (nonatomic, weak) id<TableViewCellDelegate>delegate;
 
-// 部門と社員のデータをセルに送信する関数
+// 部署と社員のデータをセルに送信する関数
 - (void)setCellWithDepartment:(Department *)department atIndex:(NSIndexPath *)index;
 - (void)setCellWithEmployee:(Employee *)employee atIndex:(NSIndexPath *)index;
 

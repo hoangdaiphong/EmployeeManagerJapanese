@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface AddViewController : UIViewController <HeaderViewDelegate>    // 画面遷移を管理するためHeaderViewDelegateを追加
+// 画面遷移を管理するためHeaderViewDelegateを追加
+@interface AddViewController : UIViewController <HeaderViewDelegate>
 
 // xib ファイルのUIを管理する
 @property (nonatomic, weak) IBOutlet UIView *containView;

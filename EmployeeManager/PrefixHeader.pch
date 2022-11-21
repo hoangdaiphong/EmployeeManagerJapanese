@@ -14,6 +14,6 @@
 
 #endif /* PrefixHeader_pch */
 
-// Viet code
+//二つヘッダファイルを追加
 #import "ContentManager.h"
 #import "Constant.h"

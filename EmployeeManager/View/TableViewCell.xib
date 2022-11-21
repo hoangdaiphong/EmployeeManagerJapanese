@@ -37,9 +37,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXK-g9-J1G">
-                        <rect key="frame" x="319" y="14" width="36" height="31"/>
+                        <rect key="frame" x="325" y="16" width="30" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="編集">
+                        <state key="normal" title="編集" image="edit-.png">
                             <color key="titleColor" red="0.20941220176904263" green="0.16827972384873402" blue="1" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
@@ -52,10 +52,11 @@
             <connections>
                 <outlet property="lblName" destination="Bw0-MO-dkL" id="HrK-jr-VOh"/>
             </connections>
-            <point key="canvasLocation" x="48.550724637681164" y="34.821428571428569"/>
+            <point key="canvasLocation" x="-309" y="54"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="edit-.png" width="64" height="64"/>
         <image name="remove.png" width="96" height="96"/>
     </resources>
 </document>

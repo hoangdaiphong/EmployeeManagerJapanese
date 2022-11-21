@@ -48,10 +48,10 @@
     
     // データを取る ---- NSLog(@"%@", allKeys);
     id allKeys = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&jsonError];
-    
+
     // NSArray を作成して部署配列を取得 ---- NSLog(@"%@", arrDepartmentJSON);
     NSArray *arrDepartmentJSON = [allKeys objectForKey:@"department"];
-    
+
     // 配列を参照して、JSON からデータベースに部署を追加
     for (int i = 0; i < arrDepartmentJSON.count; i++) {
         
@@ -60,7 +60,7 @@
         
         // NSArray を作成して、社員の配列を取得 ------ NSLog(@"%@", arrEmployeeJSON);
         NSArray *arrEmployeeJSON = [departmentJSON objectForKey:@"employee"];
-        
+
         // オブジェクトのデータをキーで取得 ------ NSLog(@"%@", departmentNameJSON);
         NSString *departmentNameJSON = [departmentJSON objectForKey:@"departmentName"];
         
@@ -155,7 +155,7 @@
     [self.navigationController setNavigationBarHidden:YES];
 }
 
-//7 画面の構成
+//7 画面の構成を設定
 - (void)setupView {
     
     [containView setFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];   // layout containView
@@ -163,13 +163,13 @@
     //14 ヘッダー バーを構成する
     HeaderView *header = [[HeaderView alloc] init];
     [header setHeaderWithTitle:@"部署名" hideBack:YES hideAdd:NO inController:self];
-    //17 部署画面を遷移するためdelegateに設定する
+    //17 部署画面から遷移するためdelegateに設定する
     header.delegate = self;
     [containView addSubview:header];    // ヘッダーをcontainViewに追加
     
     [tblDepartment setFrame:CGRectMake(0, 100, SCREEN_WIDTH, SCREEN_HEIGHT - 100)];     // layout tableView
     
-    // セルの設定が完了したら、tableViewセルに貼り付ける
+    //10 セルの設定が完了したら、tableViewセルに貼り付ける
     [tblDepartment registerNib:[UINib nibWithNibName:NSStringFromClass([TableViewCell class]) bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     //25 dataSource と delegateを宣言する

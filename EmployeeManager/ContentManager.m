@@ -11,7 +11,7 @@
 
 @implementation ContentManager
 
-//2 データの取得と送信を管理するシングルトンを作成する 
+//2 データの取得と送信を管理するシングルトンを作成する
 + (ContentManager *)shareManager {
     
     static ContentManager *manager = nil;
@@ -33,15 +33,15 @@
     return application.persistentContainer.viewContext;
 }
 
-//3  部署をデータベースに追加
+//3  部署をデータベースに追加する
 - (BOOL)insertDepartmentWithName:(NSString *)name {
     
     NSManagedObjectContext *context = [self getCurrentContext];
     
-    // 部署オブジェクトを作成し、「Department」というのテーブルを使用してデータベースにインサート
+    // 部署オブジェクトを作成し、「Department」というのテーブルを使用してデータベースにインサートする
     Department *department = [NSEntityDescription insertNewObjectForEntityForName:@"Department" inManagedObjectContext:context];
     
-    // Gán tên department
+    // 部署名にnameパラメータから挿入する
     department.departmentName = name;
     
     NSError *error = nil;
@@ -51,7 +51,7 @@
     
 }
 
-//31 データベースの部署を編集
+//31 データベースの部署を編集する
 - (BOOL)editDepartment:(Department *)department {
     
     if (department != nil) {
@@ -73,7 +73,7 @@
     }
 }
 
-//4 データベースの部署を削除
+//4 データベースの部署を削除する
 - (BOOL)deleteDepartment:(Department *)department {
     
     NSManagedObjectContext *context = [self getCurrentContext];

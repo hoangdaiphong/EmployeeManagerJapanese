@@ -20,17 +20,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    //1 アプリ起動時の設定で部署画面に入ります
+    //1 アプリ起動時の設定で部署画面に入る
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
     
-    // DepartmentViewController タイプでdepartmentView オブジェクトを作成する
+    // DepartmentViewController タイプでdepartmentView オブジェクトを作成
     DepartmentViewController *departmentView = [[DepartmentViewController alloc] init];
     
-    // 部署画面で遷移を作成する
+    // 部署画面で遷移を作成
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:departmentView];
     
-    // 部署画面をに遷移
+    // 部署画面を遷移
     [self.window setRootViewController:navi];
     
     [self.window makeKeyAndVisible];

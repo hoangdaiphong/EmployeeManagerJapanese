@@ -15,10 +15,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// テーブル ビュー作成するため ITableViewDataSource と UITableViewDelegate ライブラリーを追加する
+// テーブル ビュー作成するため UITableViewDataSource と UITableViewDelegate ライブラリーを追加する
 @interface DepartmentViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, HeaderViewDelegate, AddViewControllerDelegate, TableViewCellDelegate>
 
-// オブジェクト部署を含む dataList を作成する
+// オブジェクト部署を含む dataList を作成
 {
     NSMutableArray *dataList;
 }

@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) IBOutlet UIButton *btnBack;
 @property (nonatomic, weak) IBOutlet UIButton *btnAdd;
 
-// 現在の画面を管理変数
+// 現在の画面を管理
 @property (nonatomic, weak) UIViewController *currentController;
 
 // 画面遷移の変数

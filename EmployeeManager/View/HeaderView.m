@@ -46,14 +46,13 @@
     currentController = controller;
 }
 
-//16 追加ボタンをへマッピング -> 条件が合わせる場合にボタンをタッチするとheaderViewPushRightAction関数を実行される
+//16 追加ボタンへマッピング -> 条件が合わせる場合にボタンをタッチするとheaderViewPushRightAction関数を実行される
 - (IBAction)addAction:(id)sender {
     
     if (delegate != nil && [delegate respondsToSelector:@selector(headerViewPushRightAction)]) {
         
         [delegate headerViewPushRightAction];
     }
-    
 }
 
 //20 バックボタンをへマッピング -> 条件が合わせる場合にボタンをタッチすると現在のテーブルビューを実行される -> 画面を遷移

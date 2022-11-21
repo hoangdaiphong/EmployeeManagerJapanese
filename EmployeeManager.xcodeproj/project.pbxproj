@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5723CAB429231C95000FAC6D /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 5723CAB329231C95000FAC6D /* data.json */; };
-		57DE0F80291DCDB2001B3F80 /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 57DE0F7D291DCDB1001B3F80 /* edit.png */; };
+		57CAEC9D292B121800DFC503 /* edit-.png in Resources */ = {isa = PBXBuildFile; fileRef = 57CAEC9C292B121800DFC503 /* edit-.png */; };
 		57DE0F81291DCDB2001B3F80 /* remove.png in Resources */ = {isa = PBXBuildFile; fileRef = 57DE0F7E291DCDB2001B3F80 /* remove.png */; };
 		57DE0F82291DCDB2001B3F80 /* apply.png in Resources */ = {isa = PBXBuildFile; fileRef = 57DE0F7F291DCDB2001B3F80 /* apply.png */; };
 		57EB055F2917231F00EC1896 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 57EB055E2917231F00EC1896 /* AppDelegate.m */; };
@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		5723CAB329231C95000FAC6D /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
-		57DE0F7D291DCDB1001B3F80 /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
+		57CAEC9C292B121800DFC503 /* edit-.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "edit-.png"; sourceTree = "<group>"; };
 		57DE0F7E291DCDB2001B3F80 /* remove.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove.png; sourceTree = "<group>"; };
 		57DE0F7F291DCDB2001B3F80 /* apply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apply.png; sourceTree = "<group>"; };
 		57EB055A2917231F00EC1896 /* EmployeeManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmployeeManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,8 +129,8 @@
 				57EB059F29176DA700EC1896 /* add.png */,
 				57EB059E29176DA700EC1896 /* back.png */,
 				57DE0F7F291DCDB2001B3F80 /* apply.png */,
-				57DE0F7D291DCDB1001B3F80 /* edit.png */,
 				57DE0F7E291DCDB2001B3F80 /* remove.png */,
+				57CAEC9C292B121800DFC503 /* edit-.png */,
 				5723CAB22923146A000FAC6D /* Data */,
 				57EB05932917368500EC1896 /* View */,
 				57EB0583291725FA00EC1896 /* Controller */,
@@ -255,11 +255,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				57EB05A129176DA700EC1896 /* add.png in Resources */,
-				57DE0F80291DCDB2001B3F80 /* edit.png in Resources */,
 				57EB05882917263E00EC1896 /* DepartmentViewController.xib in Resources */,
 				5723CAB429231C95000FAC6D /* data.json in Resources */,
 				57EB059D29176A9100EC1896 /* HeaderView.xib in Resources */,
 				57EB05A029176DA700EC1896 /* back.png in Resources */,
+				57CAEC9D292B121800DFC503 /* edit-.png in Resources */,
 				57EB0598291736BF00EC1896 /* TableViewCell.xib in Resources */,
 				57F45F232918A915006A5FF3 /* EmployeeViewController.xib in Resources */,
 				57DE0F81291DCDB2001B3F80 /* remove.png in Resources */,
