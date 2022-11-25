@@ -56,9 +56,6 @@
     
     [employeeList addObjectsFromArray:[[inputDepartment hasMany]allObjects]];
     
-//    [employeeList addObjectsFromArray:[[ContentManager shareManager] getAllEmployee]];
-    
-    
     [tblEmployee reloadData];
     
 }

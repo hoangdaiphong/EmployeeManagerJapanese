@@ -22,13 +22,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // URL Database file:
-//    NSString *document = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
-//    NSLog(@"%@", dirPaths);
+    NSArray<NSString *> *dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentationDirectory, NSUserDomainMask, YES);
+    NSLog(@"%@", dirPaths);
+    
     [self setupView];
     
     [self parseJSON];
+    
+
 }
 
 // JSON ------------------------------------------------------------------------------
@@ -251,8 +252,20 @@
 
 #pragma mark - TableViewCell's Delegate
 
-//30 削除ボタン：部署を含むセルをタッチすると、データベースの中でその部署を削除
+//30 削除ボタン：部署を含むセルをタッチすると、データベースの中でその部署を削除 --------------------------------------------------------------
 - (void)tableViewCellDeleteAtIndex:(NSIndexPath *)index {
+    
+    NSMutableArray *employeeList = [[NSMutableArray alloc] init];
+    
+    [employeeList addObjectsFromArray:[[dataList[index.row] hasMany]allObjects]];
+    
+    for(long i = employeeList.count; i > 0; i--) {
+        
+        if ([[ContentManager shareManager] deleteEmployee:employeeList[i - 1]]) {
+            
+            [employeeList removeObjectAtIndex:(i - 1)];
+        }
+    }
     
     if ([[ContentManager shareManager] deleteDepartment:[dataList objectAtIndex:index.row]]) {
         
